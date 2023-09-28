@@ -1,0 +1,43 @@
+@* taskList1 Template File *@
+
+@(tasks: Seq[String])(implicit request: RequestHeader, flash: Flash)
+
+@main("Task List") {
+    <h2> Task List</h2>
+
+    <ul> 
+        @for((task,i) <- tasks.zipWithIndex){
+            <li>@task</li>
+            <form method = "post" action = "@routes.TaskList1.deleteTask">
+            @helper.CSRF.formField
+            <input type = "hidden" name = "index" value ="@i"/>
+            <input type = "submit" value = "Delete"/>
+            </form>
+
+        }
+    </ul>
+
+    <form method = "post" action ="@routes.TaskList1.addTask"> 
+        @helper.CSRF.formField
+        <input type = "text" name = "newTask"> </input>
+        <input type ="submit"></input>
+    </form>
+
+    <form method = "get" action = "enterUserName1">
+        Username: <input type="text" name = "name"></input>
+        <br>
+        Color: <input type="text" name = "color"></input>
+        <br>
+        <input type ="submit"></input>
+    </form>
+
+    <form method = "post" action = "@routes.TaskList1.enterName">
+        Username: <input type="text" name = "name"></input>
+        <br>
+        <input type ="submit"></input>
+    </form>
+
+    <div> 
+        <a href="@routes.TaskList1.logout">Logout</a>
+    </div>
+}

@@ -16,11 +16,11 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
     "com.google.inject"            % "guice"                % "6.0.0",
     "com.google.inject.extensions" % "guice-assistedinject" % "6.0.0",
     guice,
-		"org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
 		"com.typesafe.play" %% "play-slick" % "5.1.0",
 		"com.typesafe.slick" %% "slick-codegen" % "3.4.1",
     "org.postgresql" % "postgresql" % "42.6.0",
     "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
+    "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % "test",
     specs2 % Test
   ),
 ).enablePlugins(PlayScala).
@@ -33,7 +33,8 @@ lazy val client = (project in file("client")).settings(commonSettings).settings(
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "2.6.0",
 		"me.shadaj" %%% "slinky-core" % "0.7.4",
-		"me.shadaj" %%% "slinky-web" % "0.7.4"
+		"me.shadaj" %%% "slinky-web" % "0.7.4",
+
   )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
