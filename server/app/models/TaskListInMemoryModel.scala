@@ -32,4 +32,8 @@ object TaskListInMemoryModel {
         true;
       } 
     }
+
+        def validateUserNoPass(username : String):Boolean = {
+        username == true
+    }
 }

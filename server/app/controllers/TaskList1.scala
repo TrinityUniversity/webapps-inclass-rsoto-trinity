@@ -114,5 +114,18 @@ class TaskList1 @Inject()(cc: MessagesControllerComponents) extends MessagesAbst
       Ok(s"$name logged in with $color.")
   }
 
-  def enterName = TODO
+  def enterName = Action {implicit request =>
+  
+      val postVals = request.body.asFormUrlEncoded
+    postVals.map {args =>
+      val username = args("name").head
+      if(models.TaskListInMemoryModel.validateUserNoPass(username)){
+          Ok(s"$username logged in.")
+      }
+      else {
+        Redirect(routes.TaskList1.login).flashing("error" ->"Invalid username/password combination.")
+      }
+      
+    }.getOrElse(Redirect(routes.TaskList1.login))
+  }
 }

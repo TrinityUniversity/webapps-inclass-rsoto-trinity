@@ -20,8 +20,12 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
 		"com.typesafe.slick" %% "slick-codegen" % "3.4.1",
     "org.postgresql" % "postgresql" % "42.6.0",
     "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
-    "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % "test",
+    "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % "test",
     specs2 % Test
+  ),
+    Test / javaOptions ++= Seq(
+    "--add-exports=java.base/sun.security.x509=ALL-UNNAMED",
+    "--add-opens=java.base/sun.security.ssl=ALL-UNNAMED" // Could be needed as well in some cases
   ),
 ).enablePlugins(PlayScala).
   dependsOn(sharedJvm)
